@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: ignite 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ignite 
+    spec:
+      containers:
+        - name: ignite 
+          image: shasb.azurecr.io/ignite
+          ports:
+          - containerPort: 80
