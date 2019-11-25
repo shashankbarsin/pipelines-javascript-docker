@@ -16,6 +16,7 @@ jobs:
     displayName: Login to ACR using img
   - script: |
       POD=$(curl k8s-poolprovider:8082/consistenthash?key=shashankbarsin/pipelines-javascript-docker | jq -r .Message)
-      echo $POD
+      export BUILDKIT_HOST="kube-pod://${POD}?namespace=azuredevops"
+      buildctl build --frontend=dockerfile.v0 --local context=app --local dockerfile=app --output type=image,name=shasb.azurecr.io/hellothere,push=true
     displayName: Build and push to ACR using buildctl
 
